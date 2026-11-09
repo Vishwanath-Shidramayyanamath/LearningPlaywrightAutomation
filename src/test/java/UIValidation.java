@@ -5,6 +5,8 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.nio.file.Paths;
+
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 public class UIValidation {
@@ -40,6 +42,9 @@ public class UIValidation {
         Locator radioButton = page.getByRole(AriaRole.RADIO, new Page.GetByRoleOptions().setName("Admin"));
         radioButton.check();
         assertThat(radioButton).isChecked();
+
+        page.screenshot(new Page.ScreenshotOptions().setPath(Paths.get("screenshot.png")));
+
         page.locator("//select[@class='form-control']").selectOption("Consultant");
         Locator checkBox = page.getByRole(AriaRole.CHECKBOX, new Page.GetByRoleOptions().setName("I Agree to the "));
         checkBox.check();
